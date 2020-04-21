@@ -58,31 +58,24 @@ public class multiagent_walkers : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		// Vector3 movement = new Vector3(moveX, 0.0f, moveY);
-
-		// // rb.AddForce(movement * 10.0f);
-		//rb.AddForce(0,10.0f,0);
+		
 		distance = transform.position - target.position;		
-        //print("Distance: "+ distance);
+        
         if (distance.magnitude<20) {
             print("In range");
 			rend.sharedMaterial=material[0];
 
             float step = Leader.GetComponent<Rigidbody>().velocity.magnitude * Time.deltaTime;
-		    //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
-            //transform.position = Vector3.Lerp(transform.position, randomTarget.position, Time.deltaTime * speed);
             
             transform.position = transform.position + new Vector3(xpos,0,xpos);
-            //transform.position = transform.position + new Vector3(xpos * speed * Time.deltaTime, xpos * speed * Time.deltaTime, 0);
             
         }
         else {
-            //transform.position = transform.position + new Vector3(0.2f, 0.2f, 0);
+            
             print("Not in range");
 			float forceAmount=1000f;
 			rend.sharedMaterial=material[1];
-            //float step = Leader.GetComponent<Rigidbody>().velocity.magnitude * Time.deltaTime;
-            //transform.position = Vector3.MoveTowards(transform.position, target.position, step);
+
             rb.AddForce((target.position - transform.position).normalized * forceAmount * Time.smoothDeltaTime);
         }
             
